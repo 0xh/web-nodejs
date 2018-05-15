@@ -1,0 +1,95 @@
+notification(color)
+	// background lighten(color, 90%)
+	border-left 5px solid color
+	// color color
+
+	&:before
+		color color
+
+	&.notification--fill
+		background color
+		border color
+		color lighten(color, 90%)
+
+	a
+		color darken(color, 30%)
+
+.notification
+	clearfix()
+	lost-column 19/24
+	min-width 550px
+	position relative
+	padding 30px 60px
+	margin-bottom 40px
+	background $color-gray-light
+	border 1px dotted $color-gray
+	color darken($color-primary, 60%)
+	box-shadow 0 1px 1px rgba(0,0,0,.05)
+	overflow hidden
+
+	&:before
+		position absolute
+		top 50px
+		left 30px
+		font-family 'Nucleo Outline'
+		text-align center
+
+	.notification__title
+		margin-bottom 35px
+
+	ul
+		position relative
+		float left
+		padding 0
+		margin 0
+		list-style none
+
+	ul li:before
+		display inline-block
+		content ''
+		height 8px
+		width 8px
+		margin-right 15px
+		background red
+
+	a
+		font-weight 500
+
+	.notification__close
+		float right
+		line-height $header-height
+		cursor pointer
+
+	&&--hide-and-slide
+		position absolute
+		top 0
+		width 100%
+		transform translateY(-100px)
+		transition all .3s ease
+		opacity 0
+		z-index 1
+
+	&&--shown
+		transform translateY(0)
+		opacity 1
+
+	&&--info
+		notification($color-info)
+
+	&&--success
+		notification($color-success)
+
+		&:before
+			content '\ece9'
+
+	&&--error
+		notification($color-error)
+
+		&:before
+			content '\ed3d'
+
+	&&--warning
+		notification($color-warning)
+
+		&:before
+			content '\ed3d'

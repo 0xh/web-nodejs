@@ -1,0 +1,65 @@
+$toggle-height = 20px
+
+.toggle
+	position relative
+	height 75px
+	background #fff
+
+	input
+		display none
+
+	&__label
+		position absolute
+		display inline-block
+		margin 10px 0 0 30px
+		font-size 12px
+		font-weight 500
+		text-transform uppercase
+		letter-spacing 0.5px
+		color $color-primary
+		cursor pointer
+
+		.toggle__slider
+			margin-top 10px
+
+	&__slider
+		position absolute
+		cursor pointer
+		top 21px
+		left 0
+		right 0
+		bottom 0
+		width $toggle-height * 2.1
+		height $toggle-height
+		background-color #ccc
+		transition .4s
+
+		&:before
+			position absolute
+			content ""
+			height $toggle-height * 0.75
+			width $toggle-height * 0.75
+			left ($toggle-height / 6.4)
+			bottom ($toggle-height / 6.4)
+			background-color white
+			transition .4s
+
+		&--round
+			border-radius 34px
+
+			&:before
+				border-radius 50px
+
+
+	&__checkbox:checked + .toggle__slider
+		background-color $color-success
+
+	&__checkbox:focus + .toggle__slider
+		box-shadow 0 0 1px #2196F3
+
+	&__checkbox:checked + .toggle__slider:before
+		transform translateX($toggle-height * 1.05)
+
+	.form .fieldset__content &
+		border 1px solid $color-gray
+

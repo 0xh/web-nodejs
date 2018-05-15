@@ -1,0 +1,71 @@
+extends ../layouts/email
+
+block vars
+  - title = 'Nieuwe aanmelding'
+
+block content
+  tr
+    td.content-block.wide
+      table.details(width='100%', cellpadding='0', cellspacing='0')
+        thead
+          th(width='50%', align='center') Bedrijfsnaam
+          th(width='50%', align='center') Contactpersoon
+        tbody
+          tr
+            td(align='center')= company
+            td(align='center')= first_name + ' ' + last_name
+
+  tr
+    td.content-block-title
+      h2 Bedrijfsgegevens
+
+  tr
+    td.content-block
+      table(width='100%', cellpadding='0', cellspacing='0')
+        tr
+          th(width='150px', align='left') Bedrijfsnaam
+          td(align='left')= company
+        tr
+          th(align='left') Adres
+          td(align='left')= address
+        tr
+          th(align='left') Postcode
+          td(align='left')= zipcode
+        tr
+          th(align='left') Plaatsnaam
+          td(align='left')= city
+        tr
+          th Landcode
+          td= country
+        tr
+          th(align='left') E-mail
+          td(align='left')= email
+
+  tr
+    td.content-block-title
+      h2 Contactgegevens
+
+  tr
+    td.content-block
+      table(width='100%', cellpadding='0', cellspacing='0')
+        tr
+          th(width='150px', align='left') Voornaam
+          td(align='left')= first_name
+        tr
+          th(align='left') Achternaam
+          td(align='left')= last_name
+        tr
+          th(align='left') E-mail
+          td(align='left')= user_email
+        //- tr
+        //-   th Taal
+        //-   td= language
+        tr
+          th(align='left') Web & Video Account
+          td(align='left')= (web_access==true) ? 'Ja' : 'Nee'
+        tr
+          th(align='left') Portal Toegang
+          td(align='left')= (admin==true) ? 'Ja' : 'Nee'
+
+
+

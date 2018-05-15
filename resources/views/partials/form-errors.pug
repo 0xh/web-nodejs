@@ -1,0 +1,14 @@
+if formErrors
+  section.notification.notification--error
+    div.notification__title
+      p Foutmelding: Er zijn één of meerdere velden niet of niet juist ingevuld. Controleer uw gegevens en verstuur het formulier opnieuw.
+
+    div.notification__content
+      ul
+        - var displayedErrors = [];
+
+        each error in formErrors.details
+          if (displayedErrors.indexOf(error.path) === -1)
+            - displayedErrors.push(error.path)
+            li= error.message
+

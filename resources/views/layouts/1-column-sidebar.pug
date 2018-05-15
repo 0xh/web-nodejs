@@ -1,0 +1,24 @@
+block vars
+include ../mixins/all
+
+doctype html
+html(lang=locale, dir='ltr')
+  include ../partials/head
+
+  body.one-column-sidebar(class='page-' + page)
+    header.header
+      include ../partials/navigation
+      block header
+
+    main
+      section.main-content
+        block content
+
+      aside.sidebar
+        block sidebar
+
+    section.bottom-content
+      block content-bottom
+
+    include ../partials/footer
+    include ../partials/scripts

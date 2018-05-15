@@ -1,0 +1,58 @@
+/* -----------------------------
+	:: Mobile Styles ::
+------------------------------ */
+
+footer.footer
+	max-width $max-width
+	margin auto
+	font-size 13px
+	color $color-gray-dark
+	background #fff
+	overflow hidden
+
+	.footer__container
+		min-height 500px
+		padding 20px
+		border-top 2px solid red
+		overflow hidden
+
+	ul
+		clearfix()
+		@extend .list
+		float left
+		width 50%
+		min-height 300px
+
+	a
+		font-weight 500
+		color $color-gray-dark
+
+		&:hover
+			color #000
+			text-decoration underline
+
+	h3
+		margin 0
+		font-size 13px
+		font-weight 700
+		text-transform uppercase
+
+	img
+		// float left
+
+
+/* -----------------------------
+	:: Tablet Styles ::
+------------------------------ */
+
+// @media screen and (min-width : 768px)
+
+
+/* -----------------------------
+	:: Desktop Styles ::
+------------------------------ */
+
+@media only screen and (min-width : 992px)
+	footer.footer
+		ul
+			width 20%

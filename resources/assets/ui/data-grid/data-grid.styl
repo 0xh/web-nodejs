@@ -1,0 +1,144 @@
+$column-height = 50px
+
+.datagrid
+	clearfix()
+	position relative
+	font-size 13px
+	min-height "calc(100vh - %s)" % ($header-height + 1)
+
+	// .length
+	// .info
+	// 	float left
+
+	// .preloader
+	// 	float right
+	// 	opacity 0
+	// 	transition all .2s ease
+
+	// &.loading .preloader
+	// 	opacity 1
+
+	.datagrid__main
+		width 100%
+		min-height "calc(100vh - 40px - %s)" % ($header-height + 1)
+
+		table
+			width 100%
+
+	.datagrid__column
+		position relative
+		height $column-height
+		padding 0 15px
+		border-bottom solid 1px #ebebeb
+		border-right solid 1px #ebebeb
+
+		&:first-child
+			padding-left 30px
+
+		&:last-child
+			padding-right 30px
+
+	.datagrid__column--label
+		text-align left
+		font-size 11px
+		font-weight 500
+		text-transform uppercase
+		letter-spacing 0.5px
+		color $color-primary
+
+		&.datagrid__column--sortable
+			cursor pointer
+
+			&:after
+				font-family 'Nucleo Outline'
+				content '\ee1d'
+				position absolute
+				top 15px
+				right 12px
+				font-size 18px
+				font-weight normal
+				color $color-gray-light
+
+			&[data-sort='ASC']:after
+				content '\eac2'
+				color $color-gray-dark
+
+			&[data-sort='DESC']:after
+				content '\eac5'
+				color $color-gray-dark
+
+
+	.datagrid__column--filter
+		padding 0
+		font-size 12px
+		font-weight normal
+		color $color-text
+
+		&:first-child
+			padding-left 0
+
+			input
+				padding-left 30px
+
+		&:last-child
+			padding-right 0
+
+			input
+				padding-right 30px
+
+		input
+			width 100%
+			height 30px
+			padding 5px 15px
+			margin 0
+			font-size 13px
+			border none
+			// placeholder-color $color-gray
+
+	.datagrid__content .datagrid__column--actions
+		padding 0
+		vertical-align top
+
+		button
+			width 140px
+			height $column-height
+			text-align left
+			padding 0 15px
+
+	.datagrid__pagination
+		width 100%
+		height 41px
+		line-height 40px
+		padding 0 0 0 30px
+		margin-top -1px
+		border-top 1px solid $color-gray-light
+		overflow hidden
+
+		.datagrid__pagination-info
+			float left
+
+		.datagrid__pagination-controls
+			float right
+			font-size 13px
+
+			ul
+				float left
+				margin 0
+				padding 0
+				list-style none
+
+				&:first-child li:first-child button
+					border-left 1px solid $color-gray-light
+
+			li
+				float left
+				padding 0
+
+				button
+					min-width 44.2px
+					padding 0 10px
+					border-right 1px solid $color-gray-light
+
+			.datagrid__pagination-page--active button
+				font-weight 500
+				color $color-primary

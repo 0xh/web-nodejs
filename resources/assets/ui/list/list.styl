@@ -1,0 +1,64 @@
+ul
+	padding 0
+	margin 0
+
+	li
+		margin-bottom 8px
+
+
+ol
+	padding-left 25px
+	line-height $text-line-height
+
+	li
+		padding-left 10px
+		margin-bottom 10px
+
+		> ol
+		> ul
+			margin 20px 0
+			padding-left 50px
+			font-size 0.9rem
+
+			> li
+				margin-bottom 5px
+
+dl
+	line-height $text-line-height
+
+	dt
+		font-weight bold
+
+	dd
+		margin 0 0 15px 0
+
+
+.list
+	padding 0
+	margin 0
+	list-style none
+
+	&.list--links li
+	&.list--usp li
+		margin-bottom 6px
+
+		&:before
+			font-family 'Nucleo Outline'
+			margin-right 15px
+			font-size 12px
+			color $color-link
+
+	&.list--links li:before
+		content '\ece8'
+
+	&.list--usp li:before
+		content '\ece9'
+
+	&.list--inline
+		li
+			display inline-block
+			margin-right 20px
+
+	&.list--justify
+		display flex
+		justify-content space-around

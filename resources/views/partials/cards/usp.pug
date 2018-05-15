@@ -1,0 +1,22 @@
+extends ../../cards/card-flex
+
+block card-vars
+  - var cardName = 'usp'
+
+block card-header
+  h3 Dit maakt ons uniek:
+
+block card-content
+  ul(class='list list--usp')
+    li Slechts 5 cent per minuut
+    li Geen abonnement of contract
+    li Geen verborgen kosten
+    li Geen dure 0900-nummers
+    li Geen verbruik, geen factuur
+    li Gratis web- & videoconference
+    li Inbelnummers in 70+ landen
+    li Reserveren is niet nodig
+    li Gespecificeerde facturen
+
+block card-links
+  a(href='/aanmelden', title='Meld u kosteloos aan', data-ga='register', data-ga-action='click', data-ga-label='Outline Green Button - Sidebar').btn.btn--secondary.btn--rounded.btn--outline.btn--small.btn--bold.btn--center.btn--justify Meld u kosteloos aan!

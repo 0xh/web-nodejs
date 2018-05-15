@@ -1,0 +1,12 @@
+extends ../layouts/1-column
+
+block content
+  article.article.article--wide
+    header.article__header
+      h1 404 - Page Not Found
+      strong Error Code: #{error.status}
+
+    section.article__content
+      if (showStack === true)
+        pre #{error.stack}
+

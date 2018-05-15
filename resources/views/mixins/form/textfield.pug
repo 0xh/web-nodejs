@@ -1,0 +1,17 @@
+mixin texfield(label, name, value, placeholder)
+
+  div.textfield(class=label ? 'textfield--with-label' : '')
+
+    +label(label, name)
+
+    input.textfield__input(
+      type=attributes.type || 'text',
+      name=name,
+      value=value,
+      placeholder=placeholder,
+      id="input-"+name,
+      class!=attributes.class,
+      disabled!=attributes.disabled,
+      autocomplete="off",
+      spellcheck="false",
+    )

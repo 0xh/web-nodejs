@@ -1,0 +1,39 @@
+.page--contact
+	.bg-image
+		background url($img-path + 'bg/gmaps.jpg')
+
+		iframe
+			height 100%
+			pointer-events none
+
+	.form__header p
+		font-weight 400
+
+	.contact-info
+		margin-bottom 50px
+
+		li:before
+			@extends .nci
+			margin-right 12px
+			font-size 22px
+			color $color-tertiary
+
+		.contact-info__phone
+			font-weight 500
+			font-size 24px
+
+			&:before
+				content '\ed7d'
+
+		.contact-info__email
+			font-size 22px
+
+			&:before
+				content '\ed22'
+
+		.contact-info__location
+			font-size 18px
+			font-weight 300
+
+			&:before
+				content '\e87a'

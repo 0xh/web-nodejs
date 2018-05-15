@@ -1,0 +1,40 @@
+.form
+	clearfix()
+
+	&.form--block
+		@extends .article
+
+	.form__header
+		@extends .article .article__header
+
+	fieldset
+		width 100%
+		margin-bottom 25px
+
+		legend
+			float left
+			width 100%
+			padding 15px 0
+			font-size 20px
+			color $color-secondary
+
+			i:before
+				font-size 20px
+				color $color-secondary
+
+		> div
+			margin-bottom -1px
+
+		.fieldset__content
+			clearfix()
+
+			> div
+				float left
+				width 100%
+				margin-bottom -1px
+
+			// > div
+				// width 50%
+
+			// > div:nth-child(2n)
+				// margin-left -1px

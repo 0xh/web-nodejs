@@ -1,0 +1,17 @@
+extends ../../cards/card-image
+
+append card-vars
+  - var cardName = 'dial-in-numbers'
+  - var color = 'primary'
+
+block card-image
+  img(src='/img/international_rates_bg.jpg', alt='Connected city background image')
+
+block card-header
+  h2 Internationaal inbellen
+  h3 Als één van de grotere conference call providers, beschikken wij over meer dan 100 inbelnummers wereldwijd. Hierdoor kunt u uw internationale deelnemers probleemloos laten inbellen op uw conference call.
+
+  br
+
+block card-links
+  a(href='/tarieven', class='btn btn--primary btn--soft btn--bold', title='Tarieven van alle landen') Tarieven van alle landen

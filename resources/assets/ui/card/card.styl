@@ -1,0 +1,229 @@
+.card
+	height 375px
+	background #fff
+
+	.card__container
+		position relative
+		height 100%
+
+	.card__image
+		display block
+		position absolute
+		top 0
+		left 0
+		height 100%
+
+		&:after
+			content ""
+			display block
+			position absolute
+			top 0
+			width 100%
+			height 100%
+
+		img
+			height 100%
+			width 100%
+			object-fit cover
+
+	.card__body
+		height 100%
+		overflow hidden
+
+	.card__header h2
+		margin-top 0
+
+	.card__header h3
+		margin 0
+
+	.card__content
+		margin-top 12px
+		overflow hidden
+
+		> p:first-child
+			margin-top 0
+
+	.card__links
+		// position absolute
+		// left 0
+		// bottom 0
+		// margin 20px 33px 33px 33px
+		width 100%
+		line-height normal
+		font-size 16px
+
+		a:not(.btn):before
+			font-family 'Nucleo Outline'
+			content '\ea99'
+			margin-right 10px
+			font-size 12px
+
+		a:first-child
+			margin-top 20px
+
+
+.card--default
+	.card__image
+		height 150px
+
+	.card__body
+		padding 150px 33px 0 33px
+
+	.card__header
+		margin-top 20px
+
+	.card__content
+		max-height 50px
+
+
+.card--cta
+	background #fff
+
+	&.card--color-primary
+		background $color-primary
+
+	&.card--color-secondary
+		background $color-secondary
+
+	&.card--color-tertiary
+		background $color-tertiary
+
+	.card__body
+		padding 50px 0
+		text-align center
+		color #fff
+
+		h2
+		h3
+			color #fff
+
+		p
+			font-size 16px
+			margin 0
+
+	.card__links
+		margin-top 25px
+
+
+.card--image
+	.card__image:after
+		background rgba(0, 0, 0, .45)
+		height 100%
+
+	.card__body
+		position relative
+		padding 50px 33px 0 33px
+		background transparent
+		z-index 1
+		color #fff
+
+		h2
+			font-weight 500
+			font-size 40px
+			color #fff
+
+		h3
+			color #fff
+
+		p
+			font-size 20px
+
+	.card__links
+		background transparent
+
+
+.card--text
+	.card__body
+		padding 33px
+
+	.card__content
+		// max-height 230px
+
+
+.card--flex
+	height auto
+
+	.card__body
+		padding 33px
+
+
+.card--high
+	height 740px
+
+	.card__image:after
+		background linear-gradient(90deg, rgba(0, 0, 0,.4) 0, transparent 75%)
+
+	.card__body
+		position relative
+		padding 300px 33px 0 33px
+		background transparent
+		z-index 1
+
+		h2
+		h3
+			color #fff
+
+	.card__links
+		background transparent
+
+
+.card--wide
+	// column(16)
+
+	.card__image:after
+		background linear-gradient(left, rgba(0, 0, 0, .4) 0%, transparent 80%);
+
+	.card__body
+		position relative
+		width 60%
+		padding 50px 33px 0 33px
+		background transparent
+		z-index 1
+
+		h2
+			font-weight 600
+			color #fff
+
+		h3
+			font-size 32px
+			color #fff
+
+	.card__links
+		background transparent
+
+.card--inline
+	height auto
+	background $color-gray-lighter
+	border 1px solid $color-gray
+
+	.card__content
+		float left
+		margin-top 0
+		line-height 60px
+		padding-right 20px
+
+	.card__content-left
+		position relative
+		float left
+		width 60px
+		height 100%
+		margin-right 20px
+		border-right 1px solid $color-gray
+		text-align center
+		overflow hidden
+
+		i:before
+			position absolute
+			center()
+			font-size 24px
+			color $color-primary
+
+	p
+		display inline
+		font-size 18px
+
+.card--rounded
+	border-radius 5px
+
+.card--shadow
+	box-shadow 0px 2px 1px 0px rgba(0,0,0,.2)

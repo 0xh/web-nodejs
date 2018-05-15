@@ -1,0 +1,21 @@
+# OS Files
+.DS_Store*
+Icon?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.directory
+*~
+
+# My Files
+.env
+yarn.lock
+yarn-error.log
+/node_modules
+/public/build/*
+/dist
+/test
+/_files
+/_project
+/.idea

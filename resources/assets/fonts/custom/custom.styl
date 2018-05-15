@@ -1,0 +1,56 @@
+@font-face {
+	font-family: 'Icons';
+	font-weight: normal;
+	font-style: normal;
+	src: url($font-path + 'icons.eot');
+	src: url($font-path + 'icons.eot?#iefix') format('embedded-opentype'),
+		url($font-path + 'icons.woff2') format('woff2'),
+		url($font-path + 'icons.woff') format('woff'),
+		url($font-path + 'icons.ttf') format('truetype'),
+		url($font-path + 'icons.svg#Nucleo') format('svg');
+}
+
+
+.icon
+	display inline-block
+	font-family 'Icons'
+	font-style normal
+	font-size inherit
+	speak none
+	text-transform none
+	/* Better Font Rendering */
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
+
+
+/*----------------------------------
+	Add a square/circle background
+-----------------------------------*/
+.icon--square
+.icon--circle
+	padding 0.33333333em
+	vertical-align -16%
+	background-color #eee
+
+.icon--circle
+	border-radius 50%
+
+
+/*------------------------
+	Font icons
+-------------------------*/
+
+.icon--menu-bold:before
+	content: "\ea02"
+
+.icon--bold-remove:before
+	content: "\ea03"
+
+.icon--conversion:before
+	content "\ea05"
+
+.icon--chart-bar-33:before
+	content "\ea06"
+
+.icon--wallet-90:before
+	content "\ea07"
