@@ -1,11 +1,21 @@
 
 import ServiceProvider 	from '../core/service-provider'
-import Joi 				from 'joi'
+import CustomRule 		from '../rule/custom'
 
 export default class Rules extends ServiceProvider
 
-	boot: ->
+	boot:->
 
-		@rules {
-			# Joi.number().min(0).integer().positive().default(0)
+		validator = @make 'validator'
+		validator.extend @make 'rule.custom'
+		validator.rule @rules
+
+	rules:(joi)->
+		return {
+			custom: joi.string().custom()
 		}
+
+	register:->
+
+		@singleton 'rule.custom', ->
+			return new CustomRule

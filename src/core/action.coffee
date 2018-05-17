@@ -1,29 +1,31 @@
 
-import Joi from 'joi'
+import Middleware from './middleware'
 
-export default class Action
+export default class Action extends Middleware
 
-	fields: []
+	middleware:(@validator)->
 
-	generateRules: (ruleSet) ->
-		if !@rules
-			rules = {}
-			for field in @fields
-				rules[field] = ruleSet[field]
+		if @fields and @fields.length
+			schema = @validator.toSchema @fields
 
-			@rules = Joi.object().keys rules
+		# schema1 = @validator.toSchema @query
+		# schema2 = @validator.toSchema @body
+		# schema3 = @validator.toSchema @params
 
-		return @rules
+		return (context, next)=>
 
-	validate: (ctx, rules) ->
-		if @fields.length
-			input 	= Object.assign {}, ctx.request.query, ctx.request.body, ctx.params
-			output 	= await Joi.validate input, rules
+			data = Object.assign(
+				{},
+				context.request.query,
+				context.request.body,
+				context.params
+			)
 
-		return output
+			if schema
+				data = await @validator.validate data, schema
 
-	middleware: (ruleSet) ->
-		return (context, next) =>
-			rules 	= @generateRules ruleSet
-			data 	= await @validate context, rules
+			# query 	= await @validator.validate context.query, 	schema1
+			# body 		= await @validator.validate context.body, 	schema2
+			# params 	= await @validator.validate context.params, schema3
+
 			return @handle context, data

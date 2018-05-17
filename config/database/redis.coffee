@@ -2,7 +2,8 @@
 env = process.env
 
 export default
-	database:
+
+	connection:
 		host: 	  env.REDIS_DB_HOST or '127.0.0.1'
 		port: 	  parseInt(env.REDIS_DB_PORT) or 6379
 		database: parseInt(env.REDIS_DB_DATABASE) or 0

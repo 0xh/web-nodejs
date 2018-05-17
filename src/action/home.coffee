@@ -3,9 +3,6 @@ import Action from '../core/action'
 
 export default class Home extends Action
 
-	constructor: (@pug) ->
-		super()
-
 	handle: (ctx) ->
 
 		data = {
@@ -15,5 +12,4 @@ export default class Home extends Action
 			}
 		}
 
-		ctx.body   = @pug.render 'pages/home', data
-		ctx.status = 200
+		await ctx.render 'pages/home', data

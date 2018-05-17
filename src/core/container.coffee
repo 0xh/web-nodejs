@@ -1,25 +1,49 @@
 
 export default class Container
 
-	constructor: ->
+	constructor:->
+
 		@instances 				= {}
 		@singletonFactories 	= {}
 		@factories 				= {}
 
-	instance: (name, instance) ->
+	defineGetterProperty:(alias, name)->
+		Object.defineProperty @, alias,
+			get:=>
+				return @make name
+
+	defineAliases:(name)->
+		aliases = [
+			name
+			@toCamelCase name
+		]
+		aliases = new Set aliases
+		aliases.forEach (alias)=>
+			@defineGetterProperty alias, name
+
+	toCamelCase: (str)->
+		return str
+			.replace /\s(.)/g, ($1)-> return $1.toUpperCase()
+			.replace /[\.\-\_]([a-z]{1})/g, ($1, $2)-> return $2.toUpperCase()
+			.replace /\s/g, ''
+
+	instance:(name, instance)->
 		@instances[name] = instance
+		@defineAliases name
 		return @
 
-	singleton: (name, factory) ->
+	singleton:(name, factory)->
 		@singletonFactories[name] = factory
+		@defineAliases name
 		return @
 
-	bind: (name, factory) ->
+	bind:(name, factory)->
 		@factories[name] = factory
+		@defineAliases name
 		return @
 
 	# construct an object instance.
-	make: (name, ...args) ->
+	make: (name, ...args)->
 		# check if the instance has already been
 		# created as a singleton
 		if (result = @instances[name])

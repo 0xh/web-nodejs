@@ -5,8 +5,8 @@ export default
 	level: 'info'
 	drivers: [
 		'console'
-		'file'
-		'sentry'
+		# 'file'
+		# 'sentry'
 	]
 
 	sentry:

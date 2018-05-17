@@ -1,7 +1,9 @@
 
-import Middleware from '../core/middleware'
+import Middleware 		from '../core/middleware'
+import ViewableError 	from '../error/viewable-error'
 
 export default class ErrorHandler extends Middleware
+
 	constructor: (@logger) ->
 		super()
 
@@ -9,11 +11,11 @@ export default class ErrorHandler extends Middleware
 		try
 			await next()
 		catch error
-			@_handleError ctx, error
+			@handleError ctx, error
 
-	_handleError: (ctx, error) ->
-		status  = error.status || 500
-		message = error.originalError || error.message
+	handleError: (ctx, error) ->
+		status  = error.status or 500
+		message = error.originalError or error.message
 
 		if error.name == "ValidationError"
 			status  = 400

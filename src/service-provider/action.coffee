@@ -17,4 +17,4 @@ export default class Action extends ServiceProvider
 			return new Health
 
 		@singleton 'action.home', ->
-			return new Home @make 'pug'
+			return new Home

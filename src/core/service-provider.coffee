@@ -12,6 +12,8 @@ export default class ServiceProvider
 	register:->
 	boot:->
 
+
+
 	resolveMiddleware:(instance)->
 		if typeof instance is 'string'
 			instance = @container.make instance
@@ -20,6 +22,19 @@ export default class ServiceProvider
 			return instance.middleware.bind instance
 
 		return instance
+
+	# ------------------------------------------
+	# Env helpers
+
+	when:(environment, callback = null)->
+
+		if environment is @container.config.app.env
+			if callback
+				await callback.call @
+
+			return true
+
+		return false
 
 	# ------------------------------------------
 	# Middleware helpers
@@ -31,11 +46,11 @@ export default class ServiceProvider
 		router.use middleware()
 
 	route:(method, path, action)->
-		action 	= @resolveMiddleware action
-		router 	= @container.make 'router'
-		rules 	= @container.make 'rule-set'
+		middleware 	= @resolveMiddleware action
+		router 		= @container.make 'router'
+		validator 	= @container.make 'validator'
 
-		router[method].call router, path, action.middleware rules
+		router[method].call router, path, middleware validator
 
 	# ------------------------------------------
 	# Route helpers
@@ -55,9 +70,9 @@ export default class ServiceProvider
 	# ------------------------------------------
 	# Validation helpers
 
-	rules:(rules)->
-		set = @container.make 'rule-set'
-		Object.assign set, rules
+	# rules:(rules)->
+	# 	set = @container.make 'rule-set'
+	# 	Object.assign set, rules
 
 	# ------------------------------------------
 	# Database helpers
