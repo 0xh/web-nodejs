@@ -9,7 +9,7 @@ export default class Core extends ServiceProvider
 	boot:->
 
 		@bootViewRenderer()
-		@bootAssets()
+		await @bootAssets()
 
 	bootViewRenderer:->
 
@@ -27,12 +27,16 @@ export default class Core extends ServiceProvider
 		assets = new Object
 
 		for route, resource of config.assets.scripts
-			assets[route] = new CoffeescriptAsset route, resource, debug
+			assets[route] = new CoffeescriptAsset resource, debug
 
 		for route, resource of config.assets.styles
-			assets[route] = new StylusAsset route, resource, debug
+			assets[route] = new StylusAsset resource, debug
 
+		promises = []
 		for route, asset of assets
 			handle = asset.handle.bind asset
 			router.get route, handle
-			asset.setup()
+
+			promises.push asset.setup()
+
+		await Promise.all promises

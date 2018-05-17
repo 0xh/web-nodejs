@@ -31,6 +31,7 @@
     "koa-router": "^7.4.0",
     "koa-views": "^6.1.4",
     "node-cron": "^1.2.1",
+    "pug": "^2.0.3",
     "raven": "^2.6.0",
     "require-dir": "^1.0.0",
     "uglifyify": "^5.0.0",

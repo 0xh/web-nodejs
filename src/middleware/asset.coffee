@@ -6,7 +6,7 @@ import ViewableError 	from '../error/viewable-error'
 
 export default class Asset extends Middleware
 
-	constructor: (@route, @resource, @debug = true) ->
+	constructor: (@resource, @debug = true) ->
 		super()
 
 	compile:->
@@ -19,10 +19,6 @@ export default class Asset extends Middleware
 			@cache = await @build()
 
 	handle: (ctx, next) ->
-
-		# check route
-		if ctx.path isnt @route
-			return next()
 
 		# serve from cache
 		if @cache

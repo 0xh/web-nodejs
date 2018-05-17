@@ -33,5 +33,7 @@ export default class CoffeescriptAsset extends Asset
 				b.transform uglifyify, { global: true }
 
 			b.bundle (error, result)->
-				if error then reject error
-				else resolve result
+				if error
+					return reject error
+
+				resolve result
