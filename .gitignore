@@ -10,6 +10,7 @@ Desktop.ini
 
 # My Files
 .env
+package-lock.json
 yarn.lock
 yarn-error.log
 /node_modules

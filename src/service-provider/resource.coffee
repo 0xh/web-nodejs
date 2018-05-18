@@ -8,7 +8,7 @@ import serve 				from 'koa-static'
 export default class Core extends ServiceProvider
 
 	boot:->
-
+		@bootStaticFiles()
 		@bootViewRenderer()
 		await @bootAssets()
 
