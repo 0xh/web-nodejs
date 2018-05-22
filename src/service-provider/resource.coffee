@@ -5,7 +5,7 @@ import ServiceProvider 		from '../core/service-provider'
 import views 				from 'koa-views'
 import serve 				from 'koa-static'
 
-export default class Core extends ServiceProvider
+export default class Resource extends ServiceProvider
 
 	boot:->
 		@bootStaticFiles()
@@ -22,11 +22,11 @@ export default class Core extends ServiceProvider
 
 	bootStaticFiles:->
 
-		koa = @make 'koa'
-		config = @make 'config'
+		koa 	= @make 'koa'
+		config 	= @make 'config'
 
 		if config.app.debug
-			app.use serve './public'
+			koa.use serve './public'
 
 	bootAssets:->
 

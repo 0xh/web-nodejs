@@ -4,14 +4,22 @@ import Middleware from './middleware'
 export default class ServiceProvider
 
 	constructor:(@container)->
-		# define alias helper functions.
+
+		# ------------------------------------------
+		# define alias helper
+
+		# functions
 		@singleton 	= @container.singleton.bind @container
 		@instance 	= @container.instance.bind @container
 		@make 		= @container.make.bind @container
 
+		# properties
+		@debug 		= @container.config.app.debug
+		@env 		= @container.config.app.env
+
+
 	register:->
 	boot:->
-
 
 
 	resolveMiddleware:(instance)->

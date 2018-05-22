@@ -16,15 +16,22 @@ export default class StylusAsset extends Asset
 				if error
 					return reject error
 
-				stylus str
+				s = stylus str
 					.set 'filename', @resource
 					.set 'include css', true
 					.set 'compress', !@debug
 
+					# always import nib
 					.use nib()
 					.import 'nib'
-					.render (error, result)->
-						if error
-							return reject error
 
-						resolve result
+				if @debug
+					s.set 'sourcemap', {
+						inline: true
+					}
+
+				s.render (error, result)->
+					if error
+						return reject error
+
+					resolve result

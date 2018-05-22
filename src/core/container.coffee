@@ -17,8 +17,7 @@ export default class Container
 			name
 			@toCamelCase name
 		]
-		aliases = new Set aliases
-		aliases.forEach (alias)=>
+		for alias in aliases
 			@defineGetterProperty alias, name
 
 	toCamelCase: (str)->
