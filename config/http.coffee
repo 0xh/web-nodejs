@@ -1,5 +1,3 @@
 
-env = process.env
-
 export default
-	port: env.HTTP_PORT or 3000
+	port: env 'HTTP_PORT', 3000

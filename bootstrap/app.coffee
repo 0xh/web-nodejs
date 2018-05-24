@@ -4,6 +4,14 @@ import requireDir	from 'require-dir'
 import dotenv	 	from 'dotenv'
 import winston		from 'winston'
 
+# dirty env helper on the global scope.
+global.env = (name, defaultValue)->
+	value = process.env[name]
+	if typeof value is 'undefined'
+		return defaultValue
+
+	return value
+
 export default (kernels = []) ->
 
 	container = new Container

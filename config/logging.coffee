@@ -1,6 +1,4 @@
 
-env = process.env
-
 export default
 	level: 'info'
 	drivers: [
@@ -10,12 +8,12 @@ export default
 	]
 
 	sentry:
-		dsn: 	env.SENTRY_DSN
+		dsn: 	env 'SENTRY_DSN'
 		level: 	'error'
 
 		config:
 			logger: 			'javascript'
-			environment: 		env.ENV
-			debug: 				env.DEBUG
+			environment: 		env 'ENV'
+			debug: 				env 'DEBUG'
 			autoBreadcrumbs: 	true
 			maxBreadcrumbs: 	150

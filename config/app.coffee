@@ -1,15 +1,13 @@
 
-env = process.env
-
 export default
-	env: 	env.ENV or 'local'
-	name: 	env.NAME or 'blacklist-service'
-	debug: 	env.DEBUG or false
+	env: 	env 'ENV', 'local'
+	name: 	env 'NAME', 'blacklist-service'
+	debug: 	env 'DEBUG', false
 
 	secret: [
-		env.SECRET_1
-		env.SECRET_2
-		env.SECRET_3
+		env 'SECRET_1'
+		env 'SECRET_2'
+		env 'SECRET_3'
 	]
 
 	services: [
