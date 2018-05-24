@@ -19,7 +19,7 @@ export default class Container
 		]
 		# we convert the array to a map to remove duplicates.
 		aliases = new Set aliases
-		for alias in aliases.values()
+		aliases.forEach (alias)=>
 			@defineGetterProperty alias, name
 
 	toCamelCase: (str)->
