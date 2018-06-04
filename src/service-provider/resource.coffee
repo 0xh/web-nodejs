@@ -9,6 +9,7 @@ export default class Resource extends ServiceProvider
 
 	boot:->
 
+		@bootStaticFiles()
 		@bootViewRenderer()
 		await @bootAssets()
 
@@ -33,8 +34,8 @@ export default class Resource extends ServiceProvider
 
 	bootStaticFiles:->
 
-		koa = @make 'koa'
-		config = @make 'config'
+		koa 	= @make 'koa'
+		config 	= @make 'config'
 
 		if config.app.debug
 			koa.use serve './public'
