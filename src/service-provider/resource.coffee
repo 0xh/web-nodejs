@@ -7,21 +7,6 @@ import serve 				from 'koa-static'
 
 export default class Resource extends ServiceProvider
 
-	register:->
-
-		@singleton 'assets', ->
-			config = @make 'config'
-			debug  = config.app.debug
-			assets = new Object
-
-			for route, resource of config.assets.scripts
-				assets[route] = new CoffeescriptAsset resource, debug
-
-			for route, resource of config.assets.styles
-				assets[route] = new StylusAsset resource, debug
-
-			return assets
-
 	boot:->
 
 		@bootViewRenderer()
@@ -31,15 +16,14 @@ export default class Resource extends ServiceProvider
 
 		koa = @make 'koa'
 
-		koa.use views './resources/views/', {
+		koa.use views './resources/views/',
 			extension: 'pug'
-		}
+
+		assets = @make 'assets'
 
 		koa.use (ctx, next)=>
 			ctx.state =
 				asset: (name)=>
-
-					assets = @make 'assets'
 					if (asset = assets[name]) and asset.cache
 						return asset.cache.md5
 
@@ -68,7 +52,22 @@ export default class Resource extends ServiceProvider
 
 		for route, asset of assets
 			handle = asset.handle.bind asset
-			router.get route, handle
+
 			if asset.cache
 				router.get '/' + asset.cache.md5, handle
-				router.get '/+1+' + asset.cache.md5, handle
+			else
+				router.get route, handle
+
+	register:->
+
+		@singleton 'assets', ->
+			debug  = @config.app.debug
+			assets = new Object
+
+			for route, resource of @config.assets.scripts
+				assets[route] = new CoffeescriptAsset resource, debug
+
+			for route, resource of @config.assets.styles
+				assets[route] = new StylusAsset resource, debug
+
+			return assets
