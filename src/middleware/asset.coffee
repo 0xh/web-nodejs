@@ -71,7 +71,7 @@ export default class Asset extends Middleware
 	hex: (md5)->
 		buf = Buffer.from md5, 'base64'
 		hex = buf.toString 'hex'
-		hex = hex.substring 0, 8
+		hex = hex.substring 0, 16
 		return hex
 
 	md5: (src)->

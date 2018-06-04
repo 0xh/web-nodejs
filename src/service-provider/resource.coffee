@@ -37,7 +37,7 @@ export default class Resource extends ServiceProvider
 		config = @make 'config'
 
 		if config.app.debug
-			app.use serve './public'
+			koa.use serve './public'
 
 	bootAssets:->
 
