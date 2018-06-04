@@ -80,7 +80,7 @@ export default class Asset extends Middleware
 
 	gzip: (src)->
 		buf = Buffer.from src, 'utf8'
-		return new Promise (resolve, reject)=>
+		return new Promise (resolve, reject)->
 			zlib.gzip buf, (error, result)->
 				if error
 					reject error

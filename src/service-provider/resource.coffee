@@ -21,9 +21,9 @@ export default class Resource extends ServiceProvider
 
 		assets = @make 'assets'
 
-		koa.use (ctx, next)=>
+		koa.use (ctx, next)->
 			ctx.state =
-				asset: (name)=>
+				asset: (name)->
 					if (asset = assets[name]) and asset.cache
 						return asset.cache.uri
 
@@ -64,10 +64,10 @@ export default class Resource extends ServiceProvider
 			debug  = @config.app.debug
 			assets = new Object
 
-			for route, resource of @config.assets.scripts
+			for route, resource of @config.resource.scripts
 				assets[route] = new CoffeescriptAsset resource, debug
 
-			for route, resource of @config.assets.styles
+			for route, resource of @config.resource.styles
 				assets[route] = new StylusAsset resource, debug
 
 			return assets
