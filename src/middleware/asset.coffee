@@ -55,16 +55,22 @@ export default class Asset extends Middleware
 	build:->
 
 		src = await @compile()
+		md5 = @md5 src
 
 		return {
 			src
-			md5: @md5 src
+			md5
+			uri: @uri md5
 			zip: await @gzip src
 		}
 
 	shouldGzip:(ctx)->
 		encodings = ctx.acceptsEncodings()
 		return ~encodings.indexOf 'gzip'
+
+	uri: (md5)->
+		uri = Buffer.from md5, 'base64'
+		return uri.toString 'base32'
 
 	md5: (src)->
 		return crypto

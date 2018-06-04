@@ -17,7 +17,7 @@ export default class ErrorHandler extends Middleware
 		status  = error.status or 500
 		message = error.originalError or error.message
 
-		if error.name == "ValidationError"
+		if error.name is "ValidationError"
 			status  = 400
 			message = error.details[0].message
 

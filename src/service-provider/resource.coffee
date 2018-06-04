@@ -25,7 +25,7 @@ export default class Resource extends ServiceProvider
 			ctx.state =
 				asset: (name)=>
 					if (asset = assets[name]) and asset.cache
-						return asset.cache.md5
+						return asset.cache.uri
 
 					return name
 
@@ -54,7 +54,7 @@ export default class Resource extends ServiceProvider
 			handle = asset.handle.bind asset
 
 			if asset.cache
-				router.get '/' + asset.cache.md5, handle
+				router.get '/' + asset.cache.uri, handle
 			else
 				router.get route, handle
 
