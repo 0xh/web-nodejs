@@ -54,7 +54,7 @@ export default class Resource extends ServiceProvider
 			handle = asset.handle.bind asset
 
 			if asset.cache
-				router.get '/' + asset.cache.uri, handle
+				router.get '/' + asset.cache.hex, handle
 			else
 				router.get route, handle
 
