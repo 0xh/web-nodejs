@@ -60,7 +60,7 @@ export default class Asset extends Middleware
 		return {
 			src
 			md5
-			uri: @uri md5
+			hex: @hex md5
 			zip: await @gzip src
 		}
 
@@ -68,9 +68,9 @@ export default class Asset extends Middleware
 		encodings = ctx.acceptsEncodings()
 		return ~encodings.indexOf 'gzip'
 
-	uri: (md5)->
-		uri = Buffer.from md5, 'base64'
-		return uri.toString 'base32'
+	hex: (md5)->
+		buf = Buffer.from md5, 'base64'
+		return buf.toString 'hex'
 
 	md5: (src)->
 		return crypto
