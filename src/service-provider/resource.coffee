@@ -25,7 +25,7 @@ export default class Resource extends ServiceProvider
 			ctx.state =
 				asset: (name)->
 					if (asset = assets[name]) and asset.cache
-						return asset.cache.uri
+						return asset.cache.hex
 
 					return name
 
