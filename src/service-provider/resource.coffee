@@ -7,8 +7,23 @@ import serve 				from 'koa-static'
 
 export default class Resource extends ServiceProvider
 
+	register:->
+
+		@singleton 'assets', ->
+			config = @make 'config'
+			debug  = config.app.debug
+			assets = new Object
+
+			for route, resource of config.assets.scripts
+				assets[route] = new CoffeescriptAsset resource, debug
+
+			for route, resource of config.assets.styles
+				assets[route] = new StylusAsset resource, debug
+
+			return assets
+
 	boot:->
-		@bootStaticFiles()
+
 		@bootViewRenderer()
 		await @bootAssets()
 
@@ -20,32 +35,40 @@ export default class Resource extends ServiceProvider
 			extension: 'pug'
 		}
 
+		koa.use (ctx, next)=>
+			ctx.state =
+				asset: (name)=>
+
+					assets = @make 'assets'
+					if (asset = assets[name]) and asset.cache
+						return asset.cache.md5
+
+					return name
+
+			next()
+
 	bootStaticFiles:->
 
-		koa 	= @make 'koa'
-		config 	= @make 'config'
+		koa = @make 'koa'
+		config = @make 'config'
 
 		if config.app.debug
-			koa.use serve './public'
+			app.use serve './public'
 
 	bootAssets:->
 
-		config = @make 'config'
+		assets = @make 'assets'
 		router = @make 'router'
-		debug  = config.app.debug
-		assets = new Object
-
-		for route, resource of config.assets.scripts
-			assets[route] = new CoffeescriptAsset resource, debug
-
-		for route, resource of config.assets.styles
-			assets[route] = new StylusAsset resource, debug
 
 		promises = []
 		for route, asset of assets
-			handle = asset.handle.bind asset
-			router.get route, handle
-
-			promises.push asset.setup()
+			promises.push asset.setup @
 
 		await Promise.all promises
+
+		for route, asset of assets
+			handle = asset.handle.bind asset
+			router.get route, handle
+			if asset.cache
+				router.get '/' + asset.cache.md5, handle
+				router.get '/+1+' + asset.cache.md5, handle

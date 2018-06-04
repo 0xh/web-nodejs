@@ -2,6 +2,7 @@
 import zlib 			from 'zlib'
 import crypto 			from 'crypto'
 import Middleware 		from '../core/middleware'
+import ViewableError 	from '../error/viewable-error'
 
 export default class Asset extends Middleware
 
@@ -21,15 +22,16 @@ export default class Asset extends Middleware
 
 		# serve from cache
 		if @cache
-			@respond ctx, @cache
+			ctx.response.set 'Cache-Control', 'max-age=2592000, public'
+			@response ctx, @cache
 			return
 
 		# build asset from source
 		file = await @build()
-		@respond ctx, file
+		@response ctx, file
 
 
-	respond:(ctx, file)->
+	response:(ctx, file)->
 
 		ctx.status 			= 200
 		ctx.response.etag 	= file.md5
