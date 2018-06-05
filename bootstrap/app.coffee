@@ -18,7 +18,7 @@ export default (kernels = []) ->
 	# ----------------------------------------
 	# Fase 2: Load the config file
 
-	config = ConfigLoader.load()
+	config = ConfigLoader.load __dirname + '/../config'
 	container.instance 'config', config
 
 
