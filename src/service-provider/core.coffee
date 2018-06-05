@@ -6,9 +6,6 @@ import Validator 		from '../core/validator'
 import ServiceProvider 	from '../core/service-provider'
 import HttpKernel 		from '../kernel/http'
 
-# import ManifestHelper	from '../helper/manifest-helper'
-# path = require 'path'
-
 export default class Core extends ServiceProvider
 
 	register: ->
@@ -23,8 +20,4 @@ export default class Core extends ServiceProvider
 			return new Koa
 
 		@singleton 'kernel.http', ->
-			koa 	= @make 'koa'
-			router 	= @make 'router'
-			config 	= @make 'config'
-
-			return new HttpKernel koa, router, config.http.port
+			return new HttpKernel @koa, @router, @config.http.port

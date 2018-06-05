@@ -1,28 +1,8 @@
 
-import Container 	from '../src/core/container'
-import requireDir	from 'require-dir'
-import dotenv	 	from 'dotenv'
-import winston		from 'winston'
-
-# dirty env helper on the global scope.
-global.env = (name, defaultValue)->
-	value = process.env[name]
-	if typeof value is 'undefined'
-		return defaultValue
-
-	if value is 'true' or value is 'TRUE'
-		return true
-
-	if value is 'false' or value is 'FALSE'
-		return false
-
-	if !isNaN value
-		return Number value
-
-	if value is 'null' or value is 'NULL'
-		return null
-
-	return value
+import Container 		from '../src/core/container'
+import ConfigLoader 	from '../src/core/config-loader'
+import dotenv	 		from 'dotenv'
+import winston			from 'winston'
 
 export default (kernels = []) ->
 
@@ -30,6 +10,7 @@ export default (kernels = []) ->
 
 	# ----------------------------------------
 	# Fase 1: Load the environment variables
+	# from a .env file
 
 	dotenv.load()
 
@@ -37,9 +18,7 @@ export default (kernels = []) ->
 	# ----------------------------------------
 	# Fase 2: Load the config file
 
-	config = requireDir "../config/", { recurse: true }
-	Object.freeze config
-
+	config = ConfigLoader.load()
 	container.instance 'config', config
 
 
