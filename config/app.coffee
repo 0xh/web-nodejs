@@ -12,8 +12,8 @@ export default
 
 	services: [
 		__dirname + '/../src/service-provider/core'
+		__dirname + '/../src/service-provider/rules'
 		__dirname + '/../src/service-provider/middleware'
 		__dirname + '/../src/service-provider/action'
 		__dirname + '/../src/service-provider/resource'
-		__dirname + '/../src/service-provider/rules'
 	]
