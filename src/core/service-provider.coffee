@@ -22,14 +22,17 @@ export default class ServiceProvider
 	boot:->
 
 
-	resolveMiddleware:(instance)->
+	resolveMiddleware:(instance, ...params)->
 		if typeof instance is 'string'
 			instance = @container.make instance
 
-		if instance instanceof Middleware
-			return instance.middleware.bind instance
+		if instance instanceof Function
+			return instance
 
-		return instance
+		if instance instanceof Middleware
+			return instance.middleware.apply instance, params
+
+		throw new Error "Middleware must be a function or [Middleware] object, not #{typeof instance}"
 
 	# ------------------------------------------
 	# Env helpers
@@ -48,17 +51,19 @@ export default class ServiceProvider
 	# Middleware helpers
 
 	middleware:(middleware)->
-		middleware 	= @resolveMiddleware middleware
-		router 		= @container.make 'router'
+		middleware = @resolveMiddleware middleware
+		koa = @container.make 'koa'
 
-		router.use middleware()
+		koa.use middleware
 
 	route:(method, path, action)->
-		middleware 	= @resolveMiddleware action
+
 		router 		= @container.make 'router'
 		validator 	= @container.make 'validator'
 
-		router[method].call router, path, middleware validator
+		middleware 	= @resolveMiddleware action, validator
+
+		router[method].call router, path, middleware
 
 	# ------------------------------------------
 	# Route helpers
