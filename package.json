@@ -1,5 +1,5 @@
 {
-  "name": "skeleton-nodejs-frontend",
+  "name": "web-nodejs",
   "version": "1.0.0",
   "description": "Skeleton project for frontend nodejs projects written in coffeescript/stylus.",
   "private": true,
