@@ -14,17 +14,34 @@ export default class ErrorHandler extends Middleware
 			@handleError ctx, error
 
 	handleError: (ctx, error) ->
-		status  = error.status or 500
-		message = error.originalError or error.message
+
+		# ----------------------------------------------------
+		# 1. handle viewable validation errors
 
 		if error.name is "ValidationError"
 			status  = 400
 			message = error.details[0].message
 
-		else if !(error instanceof ViewableError)
-			@logger.error error
-			message = 'Something went wrong'
+		# ----------------------------------------------------
+		# 2. handle custom viewable errors
 
+		else if error instanceof ViewableError
+			status 	= error.status or 500
+			message = error.originalError or error.message
+
+		# ----------------------------------------------------
+		# 3. handle server errors
+
+		else
+			@logger.error error
+
+			status 	= 500
+			message = 'Oeps! Something went wrong.'
+
+		# ----------------------------------------------------
+		# structure the error response
+
+		ctx.status = status
 		ctx.body =
 			error:
 				message: String message
